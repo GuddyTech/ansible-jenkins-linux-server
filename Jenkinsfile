@@ -28,7 +28,7 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: 'dev-key', keyFileVariable: 'keyfile', usernameVariable: 'user')]) {
                     script {
                         //def ansibleCommand = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook ansible/playbooks/${params.ACTION}.yml -i ansible/playbooks/hosts.ini -e \"env=dev application_name=${params.APPLICATION_NAME}.service\" --private-key ${keyfile} -vvv"
-                        def ansibleCommand = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook ansible/playbooks/stop.yml -i ansible/playbooks/hosts.ini -e \"env=dev application_name=${params.APPLICATION_NAME}.service\" --private-key ${keyfile} -vvv"
+                        def ansibleCommand = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook ansible/playbooks/restart.yml -i ansible/playbooks/hosts.ini -e \"env=dev application_name=${params.APPLICATION_NAME}.service\" --private-key ${keyfile} -vvv"
                         sh ansibleCommand
                     }
                 }
