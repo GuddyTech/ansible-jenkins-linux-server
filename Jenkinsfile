@@ -25,7 +25,7 @@ pipeline {
         stage('Manage SpringBoot Application') {
             steps {
                 script {
-                    def ansibleCommand = "ansible-playbook ansible/playbooks/${params.ACTION}.yml -i ansible/playbooks/hosts.ini -e \"env=dev application_name=${params.APPLICATION_NAME}.service\" -vvv"
+                    def ansibleCommand = "sudo ansible-playbook ansible/playbooks/${params.ACTION}.yml -i ansible/playbooks/hosts.ini -e \"env=dev application_name=${params.APPLICATION_NAME}.service\" -vvv"
                     sh ansibleCommand
                 }
             }
