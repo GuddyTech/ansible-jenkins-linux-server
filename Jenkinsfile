@@ -16,6 +16,13 @@ pipeline {
                      
                     //def ansibleCommand = "ansible-playbook ansible/playbooks/${params.ACTION}.yml -i ansible/playbooks/hosts.ini -e \"env=${env} application_name=${params.APPLICATION_NAME}.service\""
                     //sh ansibleCommand 
+
+                    def remoteHost = "44.222.204.243"
+                    def remoteUser = "ubuntu"
+                    def privateKeyPath = "/home/guddytech/Pictures/dev.pem"
+
+                    // Add host key to known_hosts
+                    sh "ssh-keyscan -H ${remoteHost} >> ~/.ssh/known_hosts"
                     sh 'ansible-playbook ansible/playbooks/start.yml -i ansible/playbooks/hosts.ini -e "env=dev application_name=${APPLICATION_NAME}.service" -vvv'
                 }
             }
