@@ -10,7 +10,7 @@ pipeline {
         stage('Prepare SSH') {
             steps {
                 script {
-                    def remoteHost = "44.222.204.243"
+                    def remoteHost = "44.222.204.243" 
                     
                     // Create .ssh directory if it doesn't exist
                     sh 'mkdir -p /var/lib/jenkins/.ssh'
@@ -24,10 +24,11 @@ pipeline {
         }
         stage('Manage SpringBoot Application') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'dev-key', keyFileVariable: 'keyfile', usernameVariable: 'user')]) {
-                    script {
-                        def ansibleCommand = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook ansible/playbooks/${params.ACTION}.yml -i ansible/playbooks/hosts.ini -e \"env=dev application_name=${params.APPLICATION_NAME}.service\" --private-key ${keyfile} -vvv"
-                        sh ansibleCommand
+                script {
+                    def ansibleCommand = "ansible-playbook ansible/playbooks/${params.ACTION}.yml -i ansible/playbooks/hosts.ini -e \"env=dev application_name=${params.APPLICATION_NAME}.service\" -vvv"
+                    // Use the private key located in /var/lib/jenkins/.ssh/dev.pem
+                    withCredentials([sshUserPrivateKey(credentialsId: 'dev-key', keyFileVariable: 'keyfile', usernameVariable: 'user')]) {
+                        sh "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook ansible/playbooks/${params.ACTION}.yml -i ansible/playbooks/hosts.ini -e \"env=dev application_name=${params.APPLICATION_NAME}.service\" --private-key /var/lib/jenkins/.ssh/dev.pem -vvv"
                     }
                 }
             }
