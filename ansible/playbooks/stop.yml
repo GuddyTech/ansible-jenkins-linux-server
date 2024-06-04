@@ -1,0 +1,9 @@
+---
+- name: Stop SpringBoot Application
+  hosts: "{{ env }}"
+  become: yes
+  tasks:
+    - name: Stop application
+      systemd:
+        name: "{{ application_name }}"
+        state: stopped
