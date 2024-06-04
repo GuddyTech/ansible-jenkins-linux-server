@@ -16,7 +16,7 @@ pipeline {
                     
                     //def ansibleCommand = "ansible-playbook ansible/playbooks/${params.ACTION}.yml -i ansible/playbooks/hosts.ini -e \"env=${env} application_name=${params.APPLICATION_NAME}.service\""
                     //sh ansibleCommand
-                    sh "ansible-playbook ansible/playbooks/start.yml -i hosts.ini -e "env=dev application_name=${APPLICATION_NAME}.service" -vvv"
+                    sh 'ansible-playbook ansible/playbooks/start.yml -i hosts.ini -e "env=dev application_name=${APPLICATION_NAME}.service" -vvv'
                 }
             }
         }
