@@ -19,7 +19,7 @@ pipeline {
 
                     // Add host key to known_hosts
                     //sh "ssh-keyscan -H ${remoteHost} >> /var/lib/jenkins/.ssh/known_hosts"
-                    sh 'hi'
+                    echo 'hi'
                 }
             }
         }
