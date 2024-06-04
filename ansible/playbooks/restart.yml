@@ -1,0 +1,6 @@
+---
+- name: Restart SpringBoot Application
+  hosts: "{{ env }}"
+  become: yes
+  tasks:
+    - name: Restart application
