@@ -4,3 +4,6 @@
   become: yes
   tasks:
     - name: Restart application
+      systemd:
+        name: "{{ application_name }}"
+        state: restarted
