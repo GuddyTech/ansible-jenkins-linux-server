@@ -5,7 +5,7 @@ pipeline {
         choice(name: 'APPLICATION_NAME', choices: ['myapp', 'app2', 'app3'], description: 'Select the SpringBoot application to manage')
         choice(name: 'ACTION', choices: ['start', 'stop', 'restart'], description: 'Select the action to perform on the application')
     }
-    
+   
     stages {
         stage('Manage SpringBoot Application') {
             steps {
