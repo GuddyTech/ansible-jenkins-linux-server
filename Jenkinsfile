@@ -25,8 +25,11 @@ pipeline {
         stage('Manage SpringBoot Application') {
             steps {
                 script {
-                    def ansibleCommand = "sudo ansible-playbook ansible/playbooks/${params.ACTION}.yml -i ansible/playbooks/hosts.ini -e \"env=dev application_name=${params.APPLICATION_NAME}.service\" -vvv"
-                    sh ansibleCommand
+                    def ansibleCommand = "ansible-playbook ansible/playbooks/${params.ACTION}.yml -i ansible/playbooks/hosts.ini -e \"env=dev application_name=${params.APPLICATION_NAME}.service\" -vvv"
+                    // Use the private key located in /var/lib/jenkins/.ssh/dev.pem
+                    withCredentials([sshUserPrivateKey(credentialsId: 'dev-key', keyFileVariable: 'keyfile', usernameVariable: 'user')]) {
+                        sh "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook ansible/playbooks/${params.ACTION}.yml -i ansible/playbooks/hosts.ini -e \"env=dev application_name=${params.APPLICATION_NAME}.service\" --private-key /var/lib/jenkins/.ssh/dev.pem -vvv"
+                    }
                 }
             }
         }
