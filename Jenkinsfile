@@ -10,7 +10,7 @@ pipeline {
         stage('Prepare SSH') {
             steps {
                 script {
-                    def remoteHost = "44.222.204.243"
+                    def remoteHost = "44.222.204.243" 
                     
                     // Create .ssh directory if it doesn't exist
                     sh 'mkdir -p /var/lib/jenkins/.ssh'
