@@ -13,12 +13,13 @@ pipeline {
                     def remoteHost = "44.222.204.243"
                     
                     // Create .ssh directory if it doesn't exist
-                    sh 'mkdir -p /var/lib/jenkins/.ssh'
-                    sh 'chown jenkins:jenkins /var/lib/jenkins/.ssh'
-                    sh 'chmod 700 /var/lib/jenkins/.ssh'
+                    //sh 'mkdir -p /var/lib/jenkins/.ssh'
+                   // sh 'chown jenkins:jenkins /var/lib/jenkins/.ssh'
+                    //sh 'chmod 700 /var/lib/jenkins/.ssh'
 
                     // Add host key to known_hosts
-                    sh "ssh-keyscan -H ${remoteHost} >> /var/lib/jenkins/.ssh/known_hosts"
+                    //sh "ssh-keyscan -H ${remoteHost} >> /var/lib/jenkins/.ssh/known_hosts"
+                    sh 'hi'
                 }
             }
         }
