@@ -1,0 +1,9 @@
+---
+- name: Start SpringBoot Application
+  hosts: "{{ env }}"
+  become: yes
+  tasks:
+    - name: Start application
+      systemd:
+        name: "{{ application_name }}"
+        state: started
