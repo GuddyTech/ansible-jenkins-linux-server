@@ -8,7 +8,7 @@ pipeline {
 
     stages {
         stage('Prepare SSH') {
-            steps {
+            steps { 
                 script {
                     def remoteHost = "44.222.204.243"
                     
